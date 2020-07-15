@@ -4,6 +4,7 @@ import App from './App';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import postReducer from './reducers/postReducer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const store = createStore(postReducer);
 ReactDOM.render(

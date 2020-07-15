@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Row, Form, Button, Col } from 'react-bootstrap';
 
 export class AllPost extends Component {
     render() {
@@ -12,15 +13,18 @@ export class AllPost extends Component {
 
         ));
         return (
-            <div>
-                <h1>all post</h1>
-                <div>
-                    {posts}
-                </div>
-                {console.log('all post')}
-                {console.log(this.props.posts)}
 
-            </div>
+            <Row className="justify-content-center mb-2">
+                <div>
+                    <h1>All posts</h1>
+
+                    <div>
+                        {posts}
+                    </div>
+                    {console.log('all post')}
+                    {console.log(this.props.posts)}
+                </div>
+            </Row>
         );
     }
 }
@@ -97,16 +101,21 @@ class EditForm extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
-                    <input type="text" name="title"
-                        placeholder="enter post title"
-                        onChange={this.handleChange} value={this.state.title} /><br />
-                    <textarea name="content" placeholder="enter post"
-                        onChange={this.handleChange} value={this.state.content} /><br />
-                    <button type="submit">update</button>
-                    <button onClick={this.props.onEditFormCancel}>cancel</button>
-                </form>
-            </div >
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Group as={Row}>
+                        <Form.Control type="text" name="title"
+                            placeholder="enter post title"
+                            onChange={this.handleChange} value={this.state.title} />
+                    </Form.Group>
+                    <Form.Group as={Row}>
+                        <Form.Control as="textarea" rows="3" name="content" placeholder="enter post"
+                            onChange={this.handleChange} value={this.state.content} />
+                    </Form.Group>
+                    <Form.Row>
+                        <Button variant="secondary" type="submit">post</Button>
+                    </Form.Row>
+                </Form>
+            </div>
         );
     }
 
@@ -115,11 +124,21 @@ class EditForm extends Component {
 const Post = (props) => {
     const p = props.post;
     return (
-        <div>
-            <h3>{p.title}</h3>
-            <p>{p.content}</p>
-            <button onClick={() => props.onEditClick()}> Edit</button>
-            <button onClick={() => props.onDeleteClick(p.id)}>Delete</button>
-        </div>
+        <Col className="border border-rounded mb-2">
+            <Row>
+                <h3>{p.title}</h3>
+            </Row>
+            <Row>
+                <p>{p.content}</p>
+            </Row>
+            <Row>
+                <Col xs={6}>
+                    <Button variant="secondary" onClick={() => props.onEditClick()}>Edit</Button>{' '}
+                </Col>
+                <Col xs={6}>
+                    <Button variant="dark" onClick={() => props.onDeleteClick(p.id)}>Delete</Button>
+                </Col>
+            </Row>
+        </Col>
     );
 }

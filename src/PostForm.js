@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Row, Form, Button } from 'react-bootstrap';
 
 export class PostForm extends Component {
     constructor(props) {
@@ -32,17 +33,26 @@ export class PostForm extends Component {
     }
     render() {
         return (
-            <div>
-                <h1>Create post</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <input type="text" name="title"
-                        placeholder="enter post title"
-                        onChange={this.handleChange} value={this.state.title} /><br />
-                    <textarea name="content" placeholder="enter post"
-                        onChange={this.handleChange} value={this.state.content} /><br />
-                    <button type="submit">post</button>
-                </form>
-            </div>
+            <Row className="justify-content-center mb-3">
+                <div>
+                    <h1>Create post</h1>
+
+                    <Form onSubmit={this.handleSubmit}>
+                        <Form.Group as={Row}>
+                            <Form.Control type="text" name="title"
+                                placeholder="enter post title"
+                                onChange={this.handleChange} value={this.state.title} />
+                        </Form.Group>
+                        <Form.Group as={Row}>
+                            <Form.Control as="textarea" rows="3" name="content" placeholder="enter post"
+                                onChange={this.handleChange} value={this.state.content} />
+                        </Form.Group>
+
+                        <Button variant="secondary" type="submit">post</Button>
+
+                    </Form>
+                </div>
+            </Row>
         );
     }
 }
